@@ -4,13 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, NavbarBrand, NavbarText} from 'reactstrap';
 import BikeList from './components/BikeList';
 import BikeDetails from './components/BikeDetails';
+import { getBikesInShopCount } from './bikeManager';
 
 function App() {
-  const [inventory, setInventory] = useState({count: 0})
+  const [inventory, setInventory] = useState([])
   const [detailsBikeId, setDetailsBikeId] = useState(null)
 
   const getInventory = () => {
     //implement functionality here.... 
+    getBikesInShopCount().then(res => setInventory(res))
   }
 
   useEffect(() => {
@@ -30,7 +32,7 @@ function App() {
         </NavbarText>
         </NavbarBrand>
         <NavbarText>
-          Bikes in Garage: {inventory.count}
+          Bikes in Garage: {inventory}
         </NavbarText>
       </Navbar>
       <div className='container'>
